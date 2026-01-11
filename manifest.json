@@ -1,0 +1,23 @@
+{
+  "name": "Dippan Bhusal | Connect",
+  "short_name": "Dippan",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#FFDD00",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "https://i.ibb.co/wF9scB4c/11750.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "https://i.ibb.co/wF9scB4c/11750.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
