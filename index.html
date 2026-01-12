@@ -11,15 +11,7 @@
     <meta name="author" content="Dippan Bhusal">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://dippanbhusal.tech">
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-RQ2J23MSE1"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
 
-  gtag('config', 'G-RQ2J23MSE1');
-</script>
     <meta property="og:type" content="profile">
     <meta property="og:url" content="https://dippanbhusal.tech">
     <meta property="og:title" content="Dippan Bhusal | Connect">
@@ -335,5 +327,101 @@
             }
         }
     </script>
+    <div id="consent-modal" class="fixed bottom-4 left-4 right-4 md:left-auto md:right-4 md:w-96 bg-white/90 backdrop-blur-md p-6 rounded-2xl shadow-2xl border border-gray-200 z-[100] transform transition-all duration-500 translate-y-full opacity-0">
+    <div class="flex items-start gap-4">
+        <div class="text-2xl text-bmcYellow">
+            <i class="fas fa-cookie-bite"></i>
+        </div>
+        <div>
+            <h3 class="font-bold text-gray-900 mb-1">Privacy & Cookies</h3>
+            <p class="text-xs text-gray-500 mb-4 leading-relaxed">
+                I use Google Analytics to understand how you interact with my portfolio. No personal data is stored.
+            </p>
+            <div class="flex gap-3">
+                <button onclick="acceptConsent()" class="flex-1 bg-neutral-900 text-white py-2 rounded-lg text-xs font-bold hover:bg-black transition shadow-lg">
+                    Accept
+                </button>
+                <button onclick="declineConsent()" class="flex-1 bg-gray-100 text-gray-600 py-2 rounded-lg text-xs font-bold hover:bg-gray-200 transition">
+                    Decline
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Configuration
+    const GA_MEASUREMENT_ID = 'G-RQ2J23MSE1';
+    const STORAGE_KEY = 'analytics-consent';
+    const modal = document.getElementById('consent-modal');
+
+    // 1. Check if user has already made a choice
+    window.addEventListener('load', () => {
+        const consent = localStorage.getItem(STORAGE_KEY);
+        
+        if (consent === 'granted') {
+            loadGoogleAnalytics(); // User previously accepted, load GA immediately
+        } else if (consent === null) {
+            showModal(); // No choice made yet, show banner
+        }
+        // If 'denied', we do nothing (GA remains blocked)
+    });
+
+    // 2. Show Modal Animation
+    function showModal() {
+        setTimeout(() => {
+            modal.classList.remove('translate-y-full', 'opacity-0');
+        }, 1500); // Small delay so it doesn't pop up instantly
+    }
+
+    // 3. Hide Modal Animation
+    function hideModal() {
+        modal.classList.add('translate-y-full', 'opacity-0');
+        setTimeout(() => {
+            modal.style.display = 'none';
+        }, 500);
+    }
+
+    // 4. User Clicks "Accept"
+    function acceptConsent() {
+        localStorage.setItem(STORAGE_KEY, 'granted');
+        loadGoogleAnalytics();
+        hideModal();
+    }
+
+    // 5. User Clicks "Decline"
+    function declineConsent() {
+        localStorage.setItem(STORAGE_KEY, 'denied');
+        hideModal();
+    }
+
+    // 6. Function to Inject Google Analytics Script dynamically
+    function loadGoogleAnalytics() {
+        // Prevent loading duplicate scripts
+        if (document.getElementById('ga-script')) return;
+
+        // Create script tag 1 (gtag.js)
+        const script1 = document.createElement('script');
+        script1.id = 'ga-script';
+        script1.async = true;
+        script1.src = `https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`;
+        
+        // Create script tag 2 (config)
+        const script2 = document.createElement('script');
+        script2.innerHTML = `
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '${GA_MEASUREMENT_ID}');
+        `;
+
+        // Append to head
+        document.head.appendChild(script1);
+        document.head.appendChild(script2);
+        
+        console.log("Google Analytics Loaded 🚀");
+    }
+</script>
+    
 </body>
 </html>
