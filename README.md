@@ -26,7 +26,7 @@
 ![GitHub forks](https://img.shields.io/github/forks/KDippan/connect?style=social)
 ![GitHub watchers](https://img.shields.io/github/watchers/KDippan/connect?style=social)
 ![GitHub repo size](https://img.shields.io/github/repo-size/KDippan/connect)
-![Website](https://img.shields.io/website?url=https%3A%2F%2Fdippanbhusal.tech)
+![Website](https://img.shields.io/website?url=https://connect.dippanbhusal.tech)
 
 </div>
 
